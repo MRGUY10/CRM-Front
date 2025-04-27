@@ -1,249 +1,210 @@
 <div class="container">
-    <div class="card">
-    <!-- <p-breadcrumb class="breadcrumb" [model]="breadcrumbItems"></p-breadcrumb> -->
-<!-- <div class="vec"></div> -->
-        <div class="form">
-            <div class="vec"></div>
+  <p-toast></p-toast>
 
-            <div class="left-side">
-                <div class="fill">
-                    <div class="logo">
-                    </div>
-                    <div class="left-heading">
-                        <h3 class="inter-semi-bold">Create candidate</h3>
-                    </div>
-                    <!-- <div class="steps-content">
-                        <h3>Step <span class="step-number">1</span></h3>
-                        <p #stepNumberContent class="step-number-content active">Enter your personal information to get closer to companies.</p>
-                        <p #stepNumberContent class="step-number-content d-none">Get to know better by adding your diploma,certificate and education life.</p>
-                        <p #stepNumberContent class="step-number-content d-none">Help companies get to know you better by telling then about your past experiences.</p>
-                        <p #stepNumberContent class="step-number-content d-none">Add your profile piccture and let companies find youy fast.</p>
-                    </div> -->
-                    <ul class="progress-bar">
-                        <li #stepList class="active inter-regular">Personal Information</li>
-                        <li #stepList class="inter-regular">Education</li>
-                        <li #stepList class="inter-regular">Work Experience</li>
-                        <li #stepList class="inter-regular">Parent Information</li>
-                    </ul>
-                </div>
-            </div>
-            <div [formGroup]="mainFormGroup" class="right-side">
-                <div class="fill-form">
-                    <div formGroupName="personalInfo" #mainForm class="main active">
-                        <small><i class="pi pi-address-book"></i></small>
-                        <div class="text">
-                            <h2 class="inter-bold">Your Personal Information</h2>
-                            <p class="inter-light">Fill in the candidates personal information.</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="firstName" type="text" required require id="user_name">
-                                <span>First Name</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="lastName" type="text" required>
-                                <span>Last Name</span>
-                            </div>
-                            <div class="input-div">
-                                <select formControlName="field" required>
-                                  <option value="" disabled selected>Select Field</option>
-                                  <option value="SRT">SRT</option>
-                                  <option value="ISI">ISI</option>
-                                  <option value="GC">GC</option>
-                                </select>
-                                <span>Field</span>
-                              </div>
+  <p-card header="Application Form" styleClass="p-shadow-8">
+    <p-steps [model]="items" [readonly]="false" [(activeIndex)]="activeIndex"></p-steps>
 
-                        </div>
-
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="phoneNumber" type="tel" required require>
-                                <span>Phone number</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="email" type="email" required require>
-                                <span>E-mail Address</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="applicationDate" type="datetime-local" required require>
-                                <!-- <span>AplicationDate</span> -->
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="applicationSource" type="text" required require>
-                                <span>ApplicationSource</span>
-                            </div>
-                            <div class="input-div">
-                                <input  formControlName="country" type="text" required require>
-                                <span>Country</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="city" type="text" required require>
-                                <span>City</span>
-                            </div>
-                        </div>
-                        <div class="buttons">
-                            <button #nextButton class="next_button">Next Step</button>
-                        </div>
-                    </div>
-
-                    <div formGroupName="education" #mainForm class="main">
-                        <small><i class="pi pi-graduation-cap"></i></small>
-                        <div class="text">
-                            <h2>Education</h2>
-                            <p>Tell us more about your education trajectory.</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input  formControlName="institutionName" type="text" required require>
-                                <span>School Name</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="highestEducation" type="text" required>
-                                <span>HighestEducation</span>
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="graduationYear" type="text" required require>
-                                <span>graduationYear</span>
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                              <select formControlName="fieldOfStudy" required>
-                                <option value="" disabled selected>Select Field of Study</option>
-                                <option value="Science">Science</option>
-                                <option value="Art">Art</option>
-                                <option value="Technical">Technical</option>
-                              </select>
-                              <span>FieldOfStudy</span>
-                            </div>
-                          </div>
-
-                        <div class="buttons button_space">
-                            <button #backButton class="back_button">Back</button>
-                            <button #nextButton class="next_button">Next Step</button>
-                        </div>
-                    </div>
-
-                    <div formGroupName="workExperience" #mainForm class="main">
-                        <small><i class="pi pi-briefcase"></i></small>
-                        <div class="text">
-                            <h2>Work Experiences</h2>
-                            <p>Can you talk about your past work experience?</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="companyName" type="text">
-                                <span>Company Name</span>
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="responsibilities" type="text">
-                                <span>responsibilities</span>
-                            </div>
-                        </div>
-                        <div class="buttons button_space">
-                            <button #backButton class="back_button">Back</button>
-                            <button #nextButton class="next_button">Next Step</button>
-                        </div>
-                    </div>
-
-                    <div formGroupName="parentInfo" #mainForm class="main">
-                        <small><i class="pi pi-home"></i></small>
-                        <div class="text">
-                            <h2>Parent Information</h2>
-                            <p>Can you talk about your past work experience?</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="fullName" type="text" required>
-                                <span>FullName</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="email" type="email" required>
-                                <span>Email</span>
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input formControlName="relationshipToCandidate" type="text" required>
-                                <span>relationship</span>
-                            </div>
-                            <div class="input-div">
-                                <input formControlName="phoneNumber" type="tel" required>
-                                <span>No</span>
-                            </div>
-                        </div>
-                        <div class="buttons button_space">
-                            <button #backButton type="button" class="back_button">Back</button>
-                            <button #nextButton type="button" class="next_button submit" >Next Step</button>
-                        </div>
-                    </div>
-                     <div #mainForm class="main">
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                        </svg>
-
-                        <div class="text congrats">
-                            <h2>Congratulations!</h2>
-                            <p>Thanks Mr./Mrs. <span class="shown_name"></span> your information have been submitted successfully for the future reference we will contact you soon.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-item"></div>
-                <div class="photo"></div>
-            </div>
-            <div class="upload">
-                <div class="text  flex-item">
-                    <div class="icon"><i class="pi pi-cloud-upload" style="font-size: 2rem"></i></div>
-                    <div>
-                        <h2>Upload files</h2>
-                        <p>Create candidate using a csv file.</p>
-                    </div>
-                </div>
-                <p-toast />
-                <p-fileUpload
-                    name="file"
-                    mode="advanced"
-                    url="http://localhost:8060/api/candidates/upload"
-                    accept=".csv"
-                    [customUpload]="true"
-                    [auto]="false"
-                    (uploadHandler)="onUpload($event)"
-                    maxFileSize="1000000">
-                        <ng-template pTemplate="empty">
-                            <div class="drag-drop">
-                                <i class="pi pi-cloud-upload"></i>
-                                Drag and drop a CSV file here
-                            </div>
-                        </ng-template>
-                </p-fileUpload>
-
-                <div class="flex-item"></div>
-                <h2 style="margin-top: 20px;">Additional Documents</h2>
-                <p-fileUpload
-                    name="documents"
-                    mode="advanced"
-                    [multiple]="true"
-                    [customUpload]="true"
-                    [auto]="false"
-                    (uploadHandler)="uploadingDocuments($event)"
-                    maxFileSize="1000000">
-                        <ng-template pTemplate="empty">
-                            <div class="drag-drop">
-                                <i class="pi pi-cloud-upload"></i>
-                                Drag and drop additional documents here
-                            </div>
-                        </ng-template>
-                </p-fileUpload>
-            </div>
-<div class="vec"></div>
+    <form (ngSubmit)="onSubmit()" #applicationForm="ngForm" class="p-fluid">
+      <!-- Step 1: Personal Information -->
+      <div *ngIf="activeIndex === 0" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6">
+          <label for="matricule">Matricule</label>
+          <input pInputText id="matricule" [(ngModel)]="application.matricule" name="matricule" required>
         </div>
-    </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="firstName">First Name</label>
+          <input pInputText id="firstName" [(ngModel)]="application.firstName" name="firstName" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="lastName">Last Name</label>
+          <input pInputText id="lastName" [(ngModel)]="application.lastName" name="lastName" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="nationality">Nationality</label>
+          <p-dropdown [options]="nationalities" [(ngModel)]="application.nationality" name="nationality"
+                      placeholder="Select Nationality" required></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="regionOfOrigin">Region of Origin</label>
+          <p-dropdown [options]="regions" [(ngModel)]="application.regionOfOrigin" name="regionOfOrigin"
+                      placeholder="Select Region" required></p-dropdown>
+        </div>
+
+        <div class="p-col-12">
+          <label for="address">Address</label>
+          <input pInputText id="address" [(ngModel)]="application.address" name="address" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="whatsappNumber">WhatsApp Number</label>
+          <input pInputText id="whatsappNumber" [(ngModel)]="application.whatsappNumber" name="whatsappNumber" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="email">Email</label>
+          <input pInputText id="email" type="email" [(ngModel)]="application.email" name="email" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="dateOfBirth">Date of Birth</label>
+          <p-calendar id="dateOfBirth" [(ngModel)]="application.dateOfBirth" name="dateOfBirth"
+                      [showIcon]="true" required></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="phoneNumber">Phone Number</label>
+          <input pInputText id="phoneNumber" [(ngModel)]="application.phoneNumber" name="phoneNumber" required>
+        </div>
+
+        <div class="p-col-12">
+          <label for="program">Program</label>
+          <p-dropdown [options]="programs" [(ngModel)]="application.program" name="program"
+                      placeholder="Select Program" required></p-dropdown>
+        </div>
+      </div>
+
+      <!-- Step 2: Family Details -->
+      <div *ngIf="activeIndex === 1" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6">
+          <label for="fatherName">Father's Name</label>
+          <input pInputText id="fatherName" [(ngModel)]="application.familyDetails.fatherName" name="fatherName" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="fatherProfession">Father's Profession</label>
+          <input pInputText id="fatherProfession" [(ngModel)]="application.familyDetails.fatherProfession" name="fatherProfession" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="fatherPhone">Father's Phone</label>
+          <input pInputText id="fatherPhone" [(ngModel)]="application.familyDetails.fatherPhone" name="fatherPhone" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="motherName">Mother's Name</label>
+          <input pInputText id="motherName" [(ngModel)]="application.familyDetails.motherName" name="motherName" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="motherProfession">Mother's Profession</label>
+          <input pInputText id="motherProfession" [(ngModel)]="application.familyDetails.motherProfession" name="motherProfession" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="motherPhone">Mother's Phone</label>
+          <input pInputText id="motherPhone" [(ngModel)]="application.familyDetails.motherPhone" name="motherPhone" required>
+        </div>
+      </div>
+
+      <!-- Step 3: Education Details -->
+      <div *ngIf="activeIndex === 2" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6">
+          <label for="hasAL">Has AL</label>
+          <p-checkbox id="hasAL" [(ngModel)]="application.educationDetails.hasAL" name="hasAL"
+                      binary="true"></p-checkbox>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="upperSixthSeries">Upper Sixth Series</label>
+          <input pInputText id="upperSixthSeries" [(ngModel)]="application.educationDetails.upperSixthSeries" name="upperSixthSeries" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="totalNumberInClass">Total Number in Class</label>
+          <input pInputText id="totalNumberInClass" type="number" [(ngModel)]="application.educationDetails.totalNumberInClass" name="totalNumberInClass" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="school">School</label>
+          <input pInputText id="school" [(ngModel)]="application.educationDetails.school" name="school" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="repeatedClass">Repeated Class</label>
+          <p-checkbox id="repeatedClass" [(ngModel)]="application.educationDetails.repeatedClass" name="repeatedClass"
+                      binary="true"></p-checkbox>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="alGrades">AL Grades</label>
+          <input pInputText id="alGrades" [(ngModel)]="application.educationDetails.alGrades" name="alGrades" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="olGrades">OL Grades</label>
+          <input pInputText id="olGrades" [(ngModel)]="application.educationDetails.olGrades" name="olGrades" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="termPositions">Term Positions</label>
+          <input pInputText id="termPositions" [(ngModel)]="application.educationDetails.termPositions" name="termPositions" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="chosenWritingCenter">Chosen Writing Center</label>
+          <input pInputText id="chosenWritingCenter" [(ngModel)]="application.educationDetails.chosenWritingCenter" name="chosenWritingCenter" required>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+          <label for="chosenField">Chosen Field</label>
+          <input pInputText id="chosenField" [(ngModel)]="application.educationDetails.chosenField" name="chosenField" required>
+        </div>
+      </div>
+
+      <!-- Step 4: Documents Upload -->
+      <div *ngIf="activeIndex === 3" class="p-grid p-fluid">
+        <div class="p-col-12">
+          <label for="documents">Upload Documents</label>
+          <p-fileUpload id="documents" name="documents" (onSelect)="onFilesSelected($event)"
+                        multiple="multiple" accept="image/*,.pdf,.doc,.docx"
+                        chooseLabel="Browse" [showUploadButton]="false" [showCancelButton]="false">
+          </p-fileUpload>
+          <small>Accepted formats: PDF, DOC, DOCX, JPG, PNG</small>
+        </div>
+      </div>
+
+      <!-- Step 5: Review & Submit -->
+      <div *ngIf="activeIndex === 4" class="p-grid p-fluid">
+        <div class="p-col-12">
+          <h3>Review Your Information</h3>
+          <p-card>
+            <h4>Personal Information</h4>
+            <p><strong>Name:</strong> {{application.firstName}} {{application.lastName}}</p>
+            <p><strong>Matricule:</strong> {{application.matricule}}</p>
+            <p><strong>Nationality:</strong> {{application.nationality}}</p>
+            <p><strong>Region:</strong> {{application.regionOfOrigin}}</p>
+            <p><strong>Email:</strong> {{application.email}}</p>
+            <p><strong>Phone:</strong> {{application.phoneNumber}}</p>
+            <p><strong>Program:</strong> {{application.program}}</p>
+
+            <h4>Family Details</h4>
+            <p><strong>Father's Name:</strong> {{application.familyDetails.fatherName}}</p>
+            <p><strong>Mother's Name:</strong> {{application.familyDetails.motherName}}</p>
+
+            <h4>Education Details</h4>
+            <p><strong>School:</strong> {{application.educationDetails.school}}</p>
+            <p><strong>AL Grades:</strong> {{application.educationDetails.alGrades}}</p>
+
+            <h4>Documents</h4>
+            <p><strong>Files to upload:</strong> {{selectedFiles.length}} files selected</p>
+          </p-card>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-mt-3">
+        <div class="p-d-flex p-jc-between">
+          <button pButton type="button" label="Previous" icon="pi pi-arrow-left"
+                  (click)="prevStep()" *ngIf="activeIndex !== 0"></button>
+          <button pButton type="button" label="Next" icon="pi pi-arrow-right" iconPos="right"
+                  (click)="nextStep()" *ngIf="activeIndex !== items.length - 1"></button>
+          <button pButton type="submit" label="Submit" icon="pi pi-check"
+                  *ngIf="activeIndex === items.length - 1" [disabled]="!applicationForm.form.valid"></button>
+        </div>
+      </div>
+    </form>
+  </p-card>
 </div>

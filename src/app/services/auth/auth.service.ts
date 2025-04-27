@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8080/api/v1/auth/'; // Corrected backend URL
+  private baseUrl = 'http://20.11.21.61/:8080/api/v1/auth/'; // Corrected backend URL
 
 
   constructor(private http: HttpClient,private router: Router) {}
@@ -87,7 +87,7 @@ private handleError(error: any) {
   }
 
 
-  private apiUrl = 'http://localhost:8080/api/v1/auth/authenticate';
+  private apiUrl = 'http://20.11.21.61/:8080/api/v1/auth/authenticate';
 
   loginUser(credentials: any): Observable<any> {
     return this.http.post(this.apiUrl, credentials).pipe(
