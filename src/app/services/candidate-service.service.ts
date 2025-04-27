@@ -8,7 +8,7 @@ import { Candidate } from '../models/candidate';
 })
 export class CandidateService {
 
-  private apiUrl = 'http://localhost:8087/api/v1/candidate'; // Replace with your actual backend URL
+  private apiUrl = 'http://20.11.21.61:8087/api/v1/candidate'; // Replace with your actual backend URL
 
   constructor(private http: HttpClient) {}
 

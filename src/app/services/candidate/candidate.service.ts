@@ -9,7 +9,7 @@ import {Candidate} from "../../models/candidate";
 })
 export class CandidateService {
 
-  private apiUrl = 'http://localhost:8082/api/candidates';
+  private apiUrl = 'http://20.11.21.61:8087/api/candidates';
 
   constructor(private http: HttpClient) { }
 
