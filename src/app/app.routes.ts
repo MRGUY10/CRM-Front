@@ -22,9 +22,9 @@ import { SelfCreationnComponent } from './pages/self-creationn/self-creationn.co
 export const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent,canActivate: [authGuard]},
     {path: 'users', component: UserComponent,canActivate: [authGuard]},
-    {path: "", component: LoginComponent},
-    {path: 'forget-password', component: ForgotPasswordComponent},
-    {path: "login", component: LoginComponent},
+    {path: "", component: LoginComponent, data: { layout: false } },
+    {path: 'forget-password', component: ForgotPasswordComponent, data: { layout: false }},
+    {path: "login", component: LoginComponent, data: { layout: false }},
     {path: "pipeline", component: PipelineComponent,canActivate: [authGuard]},
     {path: 'users/:id', component: UserdetailsComponent,canActivate: [authGuard] },
     {path: 'candidates', component: CandidatesComponent,canActivate: [authGuard]},
@@ -39,7 +39,7 @@ export const routes: Routes = [
   { path: 'candidate/:id', component: CandidateDetailComponent, canActivate: [authGuard] },
   { path:"candidate-detail", component:CandidateDetailComponent,canActivate: [authGuard]},
 { path: 'update-candidate/:id', component: UpdateCandidateComponent, canActivate: [authGuard] },
-{ path: 'selfCreation', component: SelfCreationnComponent}
+{ path: 'selfCreation', component: SelfCreationnComponent, data: { layout: false }}
 
 ];
 
