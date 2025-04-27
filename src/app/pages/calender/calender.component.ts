@@ -35,7 +35,7 @@ export class CalenderComponent implements OnInit {
   }
 
   fetchEvents(): void {
-    this.http.get('http://localhost:8089/api/events').subscribe(
+    this.http.get('http://20.11.21.61:8089/api/events').subscribe(
       (data: any) => {
         this.eventSettings = {
           dataSource: data.map((event: any) => ({
