@@ -1,0 +1,168 @@
+<div class="application-page" *ngIf="application && !loading">
+  <!-- Header Card -->
+  <div class="header-card">
+    <div class="header-content">
+      <h1 class="page-title">Candidate Application Details</h1>
+      <div class="candidate-profile">
+        <h2 class="candidate-name">{{ application.firstName }} {{ application.lastName }}</h2>
+        <div class="profile-badge">
+          <span class="badge" [ngClass]="'status-' + application.status.toLowerCase()">{{ application.status }}</span>
+        </div>
+      </div>
+
+      <div class="key-details">
+        <div class="detail-item">
+          <span class="detail-label">Matricule:</span>
+          <span class="detail-value">{{ application.matricule }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Program:</span>
+          <span class="detail-value">{{ application.program }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-container">
+    <!-- Personal Details Section -->
+    <div class="detail-section">
+      <div class="section-header">
+        <i class="icon icon-user"></i>
+        <h3>Personal Details</h3>
+      </div>
+      <div class="section-content grid-layout">
+        <div class="detail-item">
+          <span class="detail-label">Nationality:</span>
+          <span class="detail-value">{{ application.nationality }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Region:</span>
+          <span class="detail-value">{{ application.regionOfOrigin }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Address:</span>
+          <span class="detail-value">{{ application.address }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Date of Birth:</span>
+          <span class="detail-value">{{ application.dateOfBirth | date:'mediumDate' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">
+        <a href="mailto:{{ application.email }}">{{ application.email }}</a>
+    </span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Phone:</span>
+          <span class="detail-value">{{ application.phoneNumber }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">WhatsApp:</span>
+          <span class="detail-value">{{ application.whatsappNumber }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Details Section -->
+    <div class="detail-section">
+      <div class="section-header">
+        <i class="icon icon-education"></i>
+        <h3>Education Details</h3>
+      </div>
+      <div class="section-content grid-layout">
+        <div class="detail-item">
+          <span class="detail-label">School:</span>
+          <span class="detail-value">{{ application.educationDetails.school }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Town:</span>
+          <span class="detail-value">{{ application.educationDetails.town }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">AL Grades:</span>
+          <span class="detail-value">{{ application.educationDetails.alGrades }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">OL Grades:</span>
+          <span class="detail-value">{{ application.educationDetails.olGrades }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Chosen Field:</span>
+          <span class="detail-value">{{ application.educationDetails.chosenField }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Writing Center:</span>
+          <span class="detail-value">{{ application.educationDetails.chosenWritingCenter }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Family Details Section -->
+    <div class="detail-section">
+      <div class="section-header">
+        <i class="icon icon-family"></i>
+        <h3>Family Details</h3>
+      </div>
+      <div class="section-content grid-layout">
+        <div class="detail-item">
+          <span class="detail-label">Father's Name:</span>
+          <span class="detail-value">{{ application.familyDetails.fatherName }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Father's Profession:</span>
+          <span class="detail-value">{{ application.familyDetails.fatherProfession }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Father's Phone:</span>
+          <span class="detail-value">{{ application.familyDetails.fatherPhone }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Mother's Name:</span>
+          <span class="detail-value">{{ application.familyDetails.motherName }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Mother's Profession:</span>
+          <span class="detail-value">{{ application.familyDetails.motherProfession }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Mother's Phone:</span>
+          <span class="detail-value">{{ application.familyDetails.motherPhone }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents Section -->
+    <div class="detail-section">
+      <div class="section-header">
+        <i class="icon icon-documents"></i>
+        <h3>Documents</h3>
+      </div>
+        <div class="section-content documents-grid">
+          <div class="document-card" *ngFor="let document of application.documents">
+            <div class="document-info">
+              <span class="document-type">{{ document.documentType }}</span>
+              <button (click)="viewDocument(application.id, document.id)" class="document-link">
+                <i class="icon icon-view"></i> View Document
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- Loading State -->
+<div *ngIf="loading" class="loading-state">
+  <div class="spinner"></div>
+  <p>Loading application details...</p>
+</div>
+
+<!-- Error State -->
+<div *ngIf="errorMessage" class="error-state">
+  <i class="icon icon-error"></i>
+  <p>{{ errorMessage }}</p>
+</div>

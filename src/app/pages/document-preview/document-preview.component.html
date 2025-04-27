@@ -1,0 +1,9 @@
+<div class="section">
+  <h3>Documents</h3>
+  <ul>
+    <li *ngFor="let document of application.documents">
+      <p><strong>Type:</strong> {{ document.documentType }}</p>
+      <button (click)="previewDocument(application.id, document.id)">Preview Document</button>
+    </li>
+  </ul>
+</div>

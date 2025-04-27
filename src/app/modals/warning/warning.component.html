@@ -1,0 +1,27 @@
+@if (message()) {
+    <div class="overlay"></div>
+    <div class="modal">
+        <div class="container">
+            <div class="modal-header">
+                <div class="shape"></div>
+                <ng-lottie
+                    width="130px"
+                    (animationCreated)="animationCreated($event)"
+                    height="130px"
+                    containerClass="alert-sign"
+                    class="alert-sign"
+                    [options]="options"
+                />
+            </div>
+            <div class="title">WARNING !</div>
+            <div class="modal-body inter-light">
+                <p>{{ message() }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-close inter-medium" (click)="confirmed.emit(false)">no</button>
+                <button type="button" class="btn btn-save inter-medium" (click)="confirmed.emit(true)">yes</button>
+            </div>
+        </div>
+    </div>
+}
+
