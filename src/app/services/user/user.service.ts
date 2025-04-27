@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private base_url= 'http://20.11.21.61/:8080/api/v1/auth';
+  private base_url= 'http://20.11.21.61:8080/api/v1/auth';
     // Subject to broadcast user creation events
     private userCreatedSource = new Subject<void>();
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:8084/events/tasks';
+  private baseUrl = 'http://20.11.21.61:8084/tasks';
 
   constructor(private http: HttpClient) {}
 

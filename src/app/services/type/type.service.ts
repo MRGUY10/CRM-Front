@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TypeService {
-  private base_url = 'http://localhost:8089/events/api/eventTypes'; // API endpoint defined in the Spring Boot controller
+  private base_url = 'http://20.11.21.61:8089/events/api/eventTypes'; // API endpoint defined in the Spring Boot controller
 
   constructor(private http: HttpClient) {}
 

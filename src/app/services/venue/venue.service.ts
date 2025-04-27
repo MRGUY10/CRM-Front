@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VenueService {
-  private base_url = 'http://localhost:8089/events/api/venues';
+  private base_url = 'http://20.11.21.61:8089/events/api/venues';
 
   constructor(private http: HttpClient) { }
   getAllVenues(): Observable<any[]> {
