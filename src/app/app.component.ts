@@ -5,14 +5,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './services/auth/auth.service';
-import { MultiStepFormComponent } from './lib/multi-step-form.component';
 import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, NavbarComponent, HeaderComponent, MultiStepFormComponent,CommonModule],
+  imports: [RouterOutlet, LoginComponent, NavbarComponent, HeaderComponent,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
