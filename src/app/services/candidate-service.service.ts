@@ -9,7 +9,7 @@ import { Candidate } from '../models/candidate';
 })
 export class CandidateService {
 
-  private apiUrl = 'http://20.11.21.61:8087/api/v1/candidate';
+  private apiUrl = 'https://candidate-service.onrender.com/api/v1/candidate';
 
   constructor(private http: HttpClient) {}
 

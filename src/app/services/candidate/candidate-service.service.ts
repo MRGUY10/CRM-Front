@@ -8,7 +8,7 @@ import {Application} from "../../pages/pipeline/Application";
   providedIn: 'root'
 })
 export class CandidateServiceService {
-  private apiUrl = 'http://20.11.21.61:8082/applications';
+  private apiUrl = 'https://application-service-lino.onrender.com/applications';
 
   constructor(private http: HttpClient) {}
 
