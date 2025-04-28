@@ -61,7 +61,6 @@ export class SelfCreationnComponent {
   ];
 
   application = {
-    matricule: '',
     firstName: '',
     lastName: '',
     nationality: '',
@@ -278,7 +277,7 @@ export class SelfCreationnComponent {
   isCurrentStepValid(): boolean {
     switch (this.activeIndex) {
       case 0: // Personal Information
-        return !!(this.application.matricule && this.application.firstName && this.application.lastName &&
+        return !!(this.application.firstName && this.application.lastName &&
           this.application.nationality && this.application.regionOfOrigin && this.application.address &&
           this.application.whatsappNumber && this.application.email && this.application.dateOfBirth &&
           this.application.phoneNumber && this.application.program);

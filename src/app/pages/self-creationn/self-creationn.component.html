@@ -8,11 +8,6 @@
       <!-- Step 1: Personal Information -->
       <div *ngIf="activeIndex === 0" class="p-grid p-fluid">
         <div class="p-col-12 p-md-6">
-          <label for="matricule">Matricule</label>
-          <input pInputText id="matricule" [(ngModel)]="application.matricule" name="matricule" required>
-        </div>
-
-        <div class="p-col-12 p-md-6">
           <label for="firstName">First Name</label>
           <input pInputText id="firstName" [(ngModel)]="application.firstName" name="firstName" required>
         </div>
@@ -235,7 +230,6 @@
               <div class="p-col-12 p-md-6">
                 <h4>Personal Information</h4>
                 <p><strong>Name:</strong> {{application.firstName}} {{application.lastName}}</p>
-                <p><strong>Matricule:</strong> {{application.matricule}}</p>
                 <p><strong>Nationality:</strong> {{application.nationality}}</p>
                 <p><strong>Region:</strong> {{application.regionOfOrigin}}</p>
                 <p><strong>Email:</strong> {{application.email}}</p>
