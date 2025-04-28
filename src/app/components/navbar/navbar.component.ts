@@ -78,7 +78,7 @@ export class NavbarComponent {
           side.classList.remove('animated');
         })
       })
-    } 
+    }
     else {
       setTimeout(() => {
         const sides = document.querySelectorAll<HTMLDivElement>('.side');
