@@ -277,21 +277,31 @@ export class SelfCreationnComponent {
 
   isCurrentStepValid(): boolean {
     switch (this.activeIndex) {
-      case 0:
-        // Validate the first step (Personal Information)
-        return !!this.application.firstName && !!this.application.lastName && !!this.application.email;
-      case 1:
-        // Validate Family Details
-        return !!this.application.familyDetails.fatherName && !!this.application.familyDetails.motherName;
-      case 2:
-        // Validate Education Details
-        return !!this.application.educationDetails.hasAL && !!this.application.educationDetails.upperSixthSeries;
-      case 3:
-        // Check if required documents are uploaded
-        return this.validateDocuments();
+      case 0: // Personal Information
+        return !!(this.application.matricule && this.application.firstName && this.application.lastName &&
+          this.application.nationality && this.application.regionOfOrigin && this.application.address &&
+          this.application.whatsappNumber && this.application.email && this.application.dateOfBirth &&
+          this.application.phoneNumber && this.application.program);
+
+      case 1: // Family Details
+        return !!(this.application.familyDetails.fatherName && this.application.familyDetails.fatherProfession &&
+          this.application.familyDetails.fatherPhone && this.application.familyDetails.motherName &&
+          this.application.familyDetails.motherProfession && this.application.familyDetails.motherPhone);
+
+      case 2: // Education Details
+        return !!(this.application.educationDetails.upperSixthSeries && this.application.educationDetails.totalNumberInClass &&
+          this.application.educationDetails.school && this.application.educationDetails.alGrades &&
+          this.application.educationDetails.olGrades && this.application.educationDetails.termPositions &&
+          this.application.educationDetails.chosenWritingCenter && this.application.educationDetails.chosenField);
+
+      case 3: // Documents Upload
+        // Ensure each document in documentUploads has a non-null file (File object)
+        return this.documentUploads.every(doc => doc.file instanceof File && doc.file !== null);
+
       default:
-        return true;
+        return true; // If no specific step, assume valid
     }
   }
+
 
 }
