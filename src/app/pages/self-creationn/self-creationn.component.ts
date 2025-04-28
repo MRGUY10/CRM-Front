@@ -228,7 +228,7 @@ export class SelfCreationnComponent {
       }
     });
 
-    this.http.post('http://localhost:8082/applications/complete', formData, {
+    this.http.post('https://application-service-lino.onrender.com/applications/complete', formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe({
