@@ -24,14 +24,26 @@
 
         <div class="p-col-12 p-md-6">
           <label for="nationality">Nationality</label>
-          <p-dropdown [options]="nationalities" [(ngModel)]="application.nationality" name="nationality"
-                      placeholder="Select Nationality" required></p-dropdown>
+          <p-dropdown
+            id="nationality"
+          [options]="nationalities"
+          [(ngModel)]="application.nationality"
+          name="nationality"
+          placeholder="Select Nationality"
+          required>
+          </p-dropdown>
         </div>
 
         <div class="p-col-12 p-md-6">
           <label for="regionOfOrigin">Region of Origin</label>
-          <p-dropdown [options]="regions" [(ngModel)]="application.regionOfOrigin" name="regionOfOrigin"
-                      placeholder="Select Region" required></p-dropdown>
+          <p-dropdown
+            id="regionOfOrigin"
+          [options]="regions"
+          [(ngModel)]="application.regionOfOrigin"
+          name="regionOfOrigin"
+          placeholder="Select Region"
+          required>
+          </p-dropdown>
         </div>
 
         <div class="p-col-12">
@@ -60,10 +72,16 @@
           <input pInputText id="phoneNumber" [(ngModel)]="application.phoneNumber" name="phoneNumber" required>
         </div>
 
-        <div class="p-col-12">
+        <div class="p-col-12 p-md-6">
           <label for="program">Program</label>
-          <p-dropdown [options]="programs" [(ngModel)]="application.program" name="program"
-                      placeholder="Select Program" required></p-dropdown>
+          <p-dropdown
+            id="program"
+          [options]="programs"
+          [(ngModel)]="application.program"
+          name="program"
+          placeholder="Select Program"
+          required>
+          </p-dropdown>
         </div>
       </div>
 
@@ -158,12 +176,53 @@
       <!-- Step 4: Documents Upload -->
       <div *ngIf="activeIndex === 3" class="p-grid p-fluid">
         <div class="p-col-12">
-          <label for="documents">Upload Documents</label>
-          <p-fileUpload id="documents" name="documents" (onSelect)="onFilesSelected($event)"
-                        multiple="multiple" accept="image/*,.pdf,.doc,.docx"
-                        chooseLabel="Browse" [showUploadButton]="false" [showCancelButton]="false">
-          </p-fileUpload>
-          <small>Accepted formats: PDF, DOC, DOCX, JPG, PNG</small>
+          <h3>Required Documents</h3>
+          <p class="p-mb-4">Please upload the following documents (Max size: 2MB each, Accepted formats: PDF, JPG, PNG):</p>
+
+          <div *ngFor="let doc of documentUploads; let i = index" class="p-field p-grid p-mb-4">
+            <div class="p-col-12 p-md-3">
+              <label [for]="'docType_' + i" class="p-text-bold">
+                {{ doc.description }}
+                <span *ngIf="doc.required" style="color: red;">*</span>
+              </label>
+            </div>
+            <div class="p-col-12 p-md-9">
+              <p-fileUpload
+                [id]="'docType_' + i"
+                [name]="'document_' + i"
+                mode="basic"
+                [chooseLabel]="doc.file ? 'Change File' : 'Select File'"
+                (onSelect)="onFileSelect($event, i)"
+                (onRemove)="onFileRemove(i)"
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                accept=".pdf,.jpg,.jpeg,.png"
+                maxFileSize="2000000"
+                styleClass="p-mb-2">
+              </p-fileUpload>
+
+              <small *ngIf="doc.file" class="p-text-secondary p-d-flex p-ai-center">
+                <i class="pi pi-file p-mr-2"></i>
+                {{ doc.file.name }} ({{ (doc.file.size / 1024).toFixed(2) }} KB)
+                <button pButton pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        class="p-button-text p-button-sm p-ml-2"
+                        (click)="onFileRemove(i)"></button>
+              </small>
+            </div>
+          </div>
+
+          <div class="p-col-12 p-mt-4" *ngIf="uploading">
+            <p-progressBar [value]="uploadProgress" [showValue]="true"></p-progressBar>
+            <small class="p-text-secondary">Uploading documents... {{uploadProgress}}%</small>
+          </div>
+
+          <div class="p-col-12 p-mt-2">
+            <p class="p-text-secondary">
+              Documents uploaded: {{getUploadedFilesCount()}} of {{getTotalRequiredDocuments()}} required
+            </p>
+          </div>
         </div>
       </div>
 
@@ -172,37 +231,83 @@
         <div class="p-col-12">
           <h3>Review Your Information</h3>
           <p-card>
-            <h4>Personal Information</h4>
-            <p><strong>Name:</strong> {{application.firstName}} {{application.lastName}}</p>
-            <p><strong>Matricule:</strong> {{application.matricule}}</p>
-            <p><strong>Nationality:</strong> {{application.nationality}}</p>
-            <p><strong>Region:</strong> {{application.regionOfOrigin}}</p>
-            <p><strong>Email:</strong> {{application.email}}</p>
-            <p><strong>Phone:</strong> {{application.phoneNumber}}</p>
-            <p><strong>Program:</strong> {{application.program}}</p>
+            <div class="p-grid">
+              <div class="p-col-12 p-md-6">
+                <h4>Personal Information</h4>
+                <p><strong>Name:</strong> {{application.firstName}} {{application.lastName}}</p>
+                <p><strong>Matricule:</strong> {{application.matricule}}</p>
+                <p><strong>Nationality:</strong> {{application.nationality}}</p>
+                <p><strong>Region:</strong> {{application.regionOfOrigin}}</p>
+                <p><strong>Email:</strong> {{application.email}}</p>
+                <p><strong>Phone:</strong> {{application.phoneNumber}}</p>
+                <p><strong>Program:</strong> {{application.program}}</p>
+              </div>
 
-            <h4>Family Details</h4>
-            <p><strong>Father's Name:</strong> {{application.familyDetails.fatherName}}</p>
-            <p><strong>Mother's Name:</strong> {{application.familyDetails.motherName}}</p>
+              <div class="p-col-12 p-md-6">
+                <h4>Family Details</h4>
+                <p><strong>Father's Name:</strong> {{application.familyDetails.fatherName}}</p>
+                <p><strong>Father's Profession:</strong> {{application.familyDetails.fatherProfession}}</p>
+                <p><strong>Mother's Name:</strong> {{application.familyDetails.motherName}}</p>
+                <p><strong>Mother's Profession:</strong> {{application.familyDetails.motherProfession}}</p>
+              </div>
 
-            <h4>Education Details</h4>
-            <p><strong>School:</strong> {{application.educationDetails.school}}</p>
-            <p><strong>AL Grades:</strong> {{application.educationDetails.alGrades}}</p>
+              <div class="p-col-12 p-mt-3">
+                <h4>Education Details</h4>
+                <p><strong>School:</strong> {{application.educationDetails.school}}</p>
+                <p><strong>Has AL:</strong> {{application.educationDetails.hasAL ? 'Yes' : 'No'}}</p>
+                <p><strong>AL Grades:</strong> {{application.educationDetails.alGrades}}</p>
+                <p><strong>OL Grades:</strong> {{application.educationDetails.olGrades}}</p>
+              </div>
 
-            <h4>Documents</h4>
-            <p><strong>Files to upload:</strong> {{selectedFiles.length}} files selected</p>
+              <div class="p-col-12 p-mt-3">
+                <h4>Documents</h4>
+                <p-table [value]="documentUploads" [responsive]="true" styleClass="p-datatable-sm">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>Document Type</th>
+                      <th>Status</th>
+                      <th>File Name</th>
+                      <th>Size</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-doc>
+                    <tr>
+                      <td>{{doc.description}}</td>
+                      <td>
+                        <span [class]="doc.file ? 'p-badge p-mr-2 p-badge-success' : 'p-badge p-mr-2 p-badge-danger'">
+                          {{doc.file ? 'Uploaded' : 'Missing'}}
+                        </span>
+                      </td>
+                      <td>{{doc.file ? doc.file.name : '--'}}</td>
+                      <td>{{doc.file ? (doc.file.size / 1024).toFixed(2) + ' KB' : '--'}}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
           </p-card>
         </div>
       </div>
 
-      <div class="p-col-12 p-mt-3">
+      <!-- Navigation Buttons -->
+      <div class="p-col-12 p-mt-4">
         <div class="p-d-flex p-jc-between">
           <button pButton type="button" label="Previous" icon="pi pi-arrow-left"
-                  (click)="prevStep()" *ngIf="activeIndex !== 0"></button>
+                  (click)="prevStep()" *ngIf="activeIndex !== 0"
+                  class="p-button-secondary"></button>
+
           <button pButton type="button" label="Next" icon="pi pi-arrow-right" iconPos="right"
-                  (click)="nextStep()" *ngIf="activeIndex !== items.length - 1"></button>
-          <button pButton type="submit" label="Submit" icon="pi pi-check"
-                  *ngIf="activeIndex === items.length - 1" [disabled]="!applicationForm.form.valid"></button>
+                  (click)="nextStep()" *ngIf="activeIndex !== items.length - 1"
+                  [disabled]="!isCurrentStepValid()"
+                  class="p-button-primary"></button>
+
+          <button pButton type="submit" label="{{uploading ? 'Uploading...' : 'Submit'}}"
+                  icon="pi pi-check" iconPos="right"
+                  *ngIf="activeIndex === items.length - 1"
+                  [disabled]="!applicationForm.form.valid || uploading"
+                  class="p-button-success">
+            <i class="pi pi-spinner pi-spin" *ngIf="uploading"></i>
+          </button>
         </div>
       </div>
     </form>
